@@ -42,6 +42,8 @@ public class PricingIntegrationTest {
     private static final Long stockPriceId = 2L;
     private static final Long cryptoPriceId = 3L;
 
+    private static final Long dummyVehicleId = 1L;
+
     private static final Price cryptoPrice = new Price(cryptoPriceId, "EUR", new BigDecimal(265.00), 3L);
 
     @BeforeAll
@@ -73,6 +75,12 @@ public class PricingIntegrationTest {
         Assertions.assertNotNull(marketPriceResponse);
     }
 
+    @Test
+    @Order(2)
+    public void testGetByVehicleId() {
+        Price price = getPriceWithVehicleId(dummyVehicleId);
+        Assertions.assertNotNull(price);
+    }
 
     @Test
     @Order(3)
@@ -106,6 +114,10 @@ public class PricingIntegrationTest {
 
     private Price getPrice(Long id) {
         return restTemplate.getForObject(PATH + "/" + id, Price.class);
+    }
+
+    private Price getPriceWithVehicleId(Long vehicleId) {
+        return restTemplate.getForObject(PATH + "/search/findByVehicleId?vehicleId=" + vehicleId, Price.class);
     }
 
 }

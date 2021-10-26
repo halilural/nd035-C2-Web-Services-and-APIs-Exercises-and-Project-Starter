@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PriceRepository extends PagingAndSortingRepository<Price, Long> {
 
-    Price findByVehicleId(@Param("vehicleId") Long vehicleId);
+    Price
+            (@Param("vehicleId") Long vehicleId);
 
 }
